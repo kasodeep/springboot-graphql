@@ -44,7 +44,6 @@ public class BookController {
 
     @MutationMapping("updateBook")
     public Book update(@Argument BookInput book, @Argument int bookId) {
-
         Book temp = this.bookService.get(bookId);
         Author author = this.authorService.get(book.getAuthor());
 
