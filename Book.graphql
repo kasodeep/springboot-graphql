@@ -1,0 +1,48 @@
+mutation CreateBook($book: BookInput){
+    # newBook is an alias.
+    newBook: createBook(book: $book){
+        ...bookFields,
+        author{
+            name
+        }
+    }
+}
+
+fragment bookFields on Book{
+    id,
+    title
+}
+
+query AllBooks {
+    allBooks {
+        ...bookFields
+    }
+}
+
+query GetOneBook($bookId: Int!, $includeAuthor: Boolean = true) {
+    getBook(bookId: $bookId) {
+        ...dynamicBookFields
+    }
+}
+
+fragment dynamicBookFields on Book {
+    id
+    title
+    description
+    price
+    pages
+    author @include(if: $includeAuthor) {
+        id
+        name
+    }
+}
+
+mutation updateExistingBook($bookId: Int! = 2, $book: BookInput!) {
+    updateBook(bookId: $bookId, book: $book) {
+        title
+    }
+}
+
+query DeleteBook($bookId: Int! = 1) {
+    deleteBook(bookId: $bookId)
+}

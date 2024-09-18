@@ -1,0 +1,45 @@
+# mutation to update data on server.
+mutation CreateAuthor($author: AuthorInput){
+    createAuthor(author: $author){
+        name
+    }
+}
+
+# query to retrieve data from server.
+query AllAuthors{
+    allAuthors {
+        ...authorFields
+    }
+}
+
+# define a fragment for common author fields to avoid repetition.
+fragment authorFields on Author {
+    id
+    name
+}
+
+query GetOneAuthor($authorId: Int!, $includeName: Boolean = true) {
+    getAuthor(authorId: $authorId) {
+        ...dynamicAuthorFields
+    }
+}
+
+# dynamic fragment with variables passed in.
+fragment dynamicAuthorFields on Author {
+    id
+    # include is a directive.
+    name @include(if: $includeName)
+    books{
+        title
+    }
+}
+
+mutation UpdateAuthor($authorId: Int!, $authorInput: AuthorInput!) {
+    updateAuthor(authorId: $authorId, author: $authorInput) {
+        name
+    }
+}
+
+query DeleteAuthor($id: Int!){
+    deleteMessage: deleteAuthor(authorId: $id)
+}
