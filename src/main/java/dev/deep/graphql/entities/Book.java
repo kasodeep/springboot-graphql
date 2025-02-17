@@ -21,6 +21,6 @@ public class Book {
     private Integer pages;
 
     @JoinColumn
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Author author;
 }

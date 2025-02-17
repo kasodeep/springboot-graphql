@@ -1,6 +1,6 @@
 # mutation to update data on server.
 mutation CreateAuthor($author: AuthorInput){
-    createAuthor(author: $author){
+    createAuthor(authorDemo: $author){
         name
     }
 }

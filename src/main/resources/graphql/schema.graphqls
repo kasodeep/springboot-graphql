@@ -38,7 +38,7 @@ type Query {
 }
 
 type Mutation {
-  createAuthor(author: AuthorInput): Author
+  createAuthor(authorDemo: AuthorInput): Author
   updateAuthor(author: AuthorInput, authorId: Int): Author
 
   createBook(book: BookInput): Book

@@ -18,7 +18,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @MutationMapping("createAuthor")
-    public Author create(@Argument AuthorInput author) {
+    public Author create(@Argument("authorDemo") AuthorInput author) {
         Author a = new Author();
         a.setName(author.getName());
         return this.authorService.create(a);
